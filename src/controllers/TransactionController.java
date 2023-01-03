@@ -28,7 +28,8 @@ public class TransactionController {
     }
 
     public void updateTransaction(int code, String item, int jumlah){
-        
+        GunEntity gun = Gun.searchGun(item);
+        Transaction.updateTransaction(code, new DetailTransactionEntity(item, jumlah, gun.getHarga()));
     }
 
     public void hapusTransaction(int code){

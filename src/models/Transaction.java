@@ -18,15 +18,15 @@ public class Transaction {
         transaction.get(index).listTransaction.add(newListTransaction);
     }
  
-    public static void updateTransaction(TransactionEntity transactionEdited){
-        int index = indexTransaction(transactionEdited.getCode());
+    // public static void updateTransaction(TransactionEntity transactionEdited){
+    //     int index = indexTransaction(transactionEdited.getCode());
 
-        try {
-            transaction.set(index, transactionEdited);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-    }
+    //     try {
+    //         transaction.set(index, transactionEdited);
+    //     } catch (Exception e) {
+    //         System.out.println(e);
+    //     }
+    // }
 
     public static void updateTransaction(int code, DetailTransactionEntity newDetailTransaction){
         int index = indexTransaction(code);
@@ -77,9 +77,9 @@ public class Transaction {
         return transaction.indexOf(searchTransaction);
     }
 
-    public static int indexTransaction(int index, String detailBarang){
-        DetailTransactionEntity searchDetailTransaction = searchTransaction(index, detailBarang);
-        return transaction.get(index).listTransaction.indexOf(searchDetailTransaction);
+    public static int indexTransaction(int code, String detailBarang){
+        DetailTransactionEntity searchDetailTransaction = searchTransaction(code, detailBarang);
+        return transaction.get(code).listTransaction.indexOf(searchDetailTransaction);
     }
 
     public static ArrayList<TransactionEntity> allTransaction(){

@@ -13,6 +13,7 @@ public class TambahListData {
 
             System.out.print("Apakah ingin menambah list lagi (y/n)? ");
             loop = input.next(); 
+            input.nextLine();
         }while(loop == "y" || loop == "Y");
 
     }
