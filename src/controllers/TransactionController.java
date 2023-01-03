@@ -5,20 +5,20 @@ import entities.DetailTransactionEntity;
 import entities.TransactionEntity;
 import models.Transaction;
 import utils.*;
-import views.Transaction.TambahListData;
+import views.Transaction.DetailTransaction.TambahDetailTransactionPage;
 import models.Gun;
 
 public class TransactionController {
     
     public void tambahTransaction(){
-        TambahListData tld = new TambahListData();
+        TambahDetailTransactionPage tld = new TambahDetailTransactionPage();
 
         String dateTime = LocalDate.now();
         int code = Transaction.getLastCode() + 1;
 
         Transaction.createTransaction(new TransactionEntity(code, dateTime, null));
 
-        tld.tambahList(code);
+        tld.tambahDetailTransaction(code);
     }
 
     public void tambahDetailTansaction(int code, String item, int jumlah){
