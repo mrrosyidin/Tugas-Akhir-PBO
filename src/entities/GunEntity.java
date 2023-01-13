@@ -1,38 +1,37 @@
 package entities;
 
-public class GunEntity extends InfantryArmEntity{
-    private String feed;
-    private String caliber;
-    private String klasifikasi;
+public class GunEntity {
+    protected String nama;
+    protected String nomorseri;
+    protected int harga;
 
-    public GunEntity(String nama, String nomorseri, int harga, String feed, String caliber, String klasifikasi) {
-        super(nama, nomorseri, harga);
-        this.feed = feed;
-        this.caliber = caliber;
-        this.klasifikasi = klasifikasi;
+    public GunEntity(String nama, String nomorseri, int harga) {
+        this.nama = nama;
+        this.nomorseri = nomorseri;
+        this.harga = harga;
     }
 
-    public String getFeed() {
-        return this.feed;
+    public String getNama() {
+        return this.nama;
     }
 
-    public void setFeed(String feed) {
-        this.feed = feed;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
-    public String getCaliber() {
-        return this.caliber;
+    public String getnomorseri() {
+        return this.nomorseri;
     }
 
-    public void setCaliber(String caliber) {
-        this.caliber = caliber;
+    public void setnomorseri(String nomorseri) {
+        this.nomorseri = nomorseri;
     }
 
-    public String getKlasifikasi() {
-        return this.klasifikasi;
+    public int getHarga() {
+        return this.harga;
     }
 
-    public void setKlasifikasi(String klasifikasi) {
-        this.klasifikasi = klasifikasi;
+    public void setHarga(int harga) {
+        this.harga = harga;
     }
 }

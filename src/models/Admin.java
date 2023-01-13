@@ -15,4 +15,9 @@ public class Admin {
         }
         return null;
     }
+
+    public static void initial(){
+
+        admin.add(new AdminEntity("admin", "admin", "admin"));
+    }
 }

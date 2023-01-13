@@ -2,20 +2,36 @@ package models;
 
 import java.util.ArrayList;
 
+import entities.CashierTransactionEntity;
 import entities.DetailTransactionEntity;
+import entities.GunEntity;
 import entities.TransactionEntity;
+
+import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+
 
 public class Transaction {
     public static ArrayList<TransactionEntity> transaction = new ArrayList<>();
 
-    public static void createTransaction(TransactionEntity newTransaction){
+    @Test
+    public void test(){
+        ArrayList<DetailTransactionEntity> dt = new ArrayList<DetailTransactionEntity>();
+        dt.add(new DetailTransactionEntity(new GunEntity("null", "null", 4), 7));
+        createTransaction(new CashierTransactionEntity(3, "3", dt));
+        createTransaction(new CashierTransactionEntity(1,"2"));
+        createTransaction(3, new DetailTransactionEntity(new GunEntity("null", "null", 44), 2000));
+        remove_DetailTransaction(0, 0);
+        assertEquals("null" ,transaction.get(0).getDetailTransaction().get(0).getItem().getNama());
+    }
+    
+    public static void createTransaction(CashierTransactionEntity newTransaction){
         transaction.add(newTransaction);
-
     }
 
-    public static void createTransaction(int code, DetailTransactionEntity newListTransaction){
-        int index = indexTransaction(code);
-        transaction.get(index).listTransaction.add(newListTransaction);
+    public static void createTransaction(int index, DetailTransactionEntity newDetailTransaction){
+
+        transaction.get(index).getDetailTransaction().add(newDetailTransaction);
     }
  
     // public static void updateTransaction(TransactionEntity transactionEdited){
@@ -28,14 +44,12 @@ public class Transaction {
     //     }
     // }
 
-    public static void updateTransaction(int code, DetailTransactionEntity newDetailTransaction){
-        int index = indexTransaction(code);
-        int index2 = indexTransaction(index, newDetailTransaction.getItem());
-        transaction.get(index).listTransaction.set(index2, newDetailTransaction);
+    public static void updateTransaction(int index1, int index2, DetailTransactionEntity newDetailTransaction){
+        
+        transaction.get(index1).getDetailTransaction().set(index2, newDetailTransaction);
     }
 
-    public static void removeTransaction(int code){
-        int index = indexTransaction(code);
+    public static void removeTransaction(int index){
 
         try {
             transaction.remove(index);
@@ -44,42 +58,9 @@ public class Transaction {
         }
     }
 
-    public static void remove_DetailTransaction(int code, String detailBarang){
-        int index = indexTransaction(getLastCode(), detailBarang);
-        int index2 = indexTransaction(index, detailBarang);
-        transaction.get(index).listTransaction.remove(index2);
-    }
-
-    public static TransactionEntity searchTransaction(int code){
-        for (TransactionEntity TransactionEntity : transaction){
-            if (TransactionEntity.getCode() == code){
-                return TransactionEntity;
-            }
-        }
-        return null;
-    }
-
-    public static DetailTransactionEntity searchTransaction(int code, String detailBarang){
-        for (TransactionEntity transactionEntity : transaction){
-            if (transactionEntity.getCode() == code){
-                for (DetailTransactionEntity detailTransactionEntity : transactionEntity.listTransaction){
-                    if (detailTransactionEntity.getItem().equals(detailBarang))
-                        return detailTransactionEntity;
-                }
-            }
-            
-        }
-        return null;
-    }
-
-    public static int indexTransaction(int code){
-        TransactionEntity searchTransaction = searchTransaction(code);
-        return transaction.indexOf(searchTransaction);
-    }
-
-    public static int indexTransaction(int code, String detailBarang){
-        DetailTransactionEntity searchDetailTransaction = searchTransaction(code, detailBarang);
-        return transaction.get(code).listTransaction.indexOf(searchDetailTransaction);
+    public static void remove_DetailTransaction(int index1, int index2){
+       
+        transaction.get(index1).getDetailTransaction().remove(index2);
     }
 
     public static ArrayList<TransactionEntity> allTransaction(){
@@ -87,11 +68,14 @@ public class Transaction {
     }
 
     public static int getLastCode(){
-        if (transaction.get(transaction.size()-1) != null){
-            return transaction.get(transaction.size()-1).getCode();
+        try {
+
+            if (transaction.get(transaction.size()-1) != null)
+                return transaction.get(transaction.size()-1).getCode();
+            
+        } catch (Exception e) {
+            
         }
-        else{
-            return 0;
-        }
+        return 0;
     }
 }

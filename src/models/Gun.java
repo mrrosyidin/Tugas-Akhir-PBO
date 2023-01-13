@@ -1,18 +1,30 @@
 package models;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import entities.GunEntity;
 
+import org.junit.Test;
+
 public class Gun {
     private static ArrayList<GunEntity> gun = new ArrayList<>();
+
+    @Test
+    public void test2(){
+        createGun(new GunEntity("AK47", "928hrd", 70000));
+        createGun(new GunEntity("AWM", "92834hd", 90000));
+        updateGun(0,new GunEntity("M14", "928hrd", 50000));
+        removeGun(0);
+        assertEquals("AWM", gun.get(0).getNama());
+    }
 
     public static void createGun(GunEntity gunBaru){
         gun.add(gunBaru);
     }
 
-    public static void updateGun(GunEntity gunEdited){
-        int index = indexGun(gunEdited.getnomorseri());
+    public static void updateGun(int index, GunEntity gunEdited){
 
         try {
             gun.set(index, gunEdited);
@@ -21,29 +33,13 @@ public class Gun {
         }        
     }
 
-    public static void removeGun(String find){
-        int index = indexGun(find);
+    public static void removeGun(int index){
 
         try {
             gun.remove(index);
         } catch (Exception e) {
             System.out.println(e);
         }
-    }
-
-    public static GunEntity searchGun(String find){
-        for (GunEntity gunEntity : gun){
-            if(gunEntity.getnomorseri().equals(find))
-                return gunEntity;
-            else if (gunEntity.getNama().equals(find))
-                return gunEntity;
-        }
-        return null;
-    }
-
-    public static int indexGun(String find){
-        GunEntity searchgun = searchGun(find);
-        return gun.indexOf(searchgun);
     }
 
     public static ArrayList<GunEntity> allGun(){

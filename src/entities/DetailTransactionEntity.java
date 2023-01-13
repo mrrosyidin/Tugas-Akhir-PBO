@@ -1,21 +1,19 @@
 package entities;
 
 public class DetailTransactionEntity {
-    private String item;
+    private GunEntity item;
     private int quantity;
-    private int price;
 
-    public DetailTransactionEntity(String item, int quantity, int price) {
+    public DetailTransactionEntity(GunEntity item, int quantity) {
         this.item = item;
         this.quantity = quantity;
-        this.price = price;
     }
 
-    public String getItem() {
+    public GunEntity getItem() {
         return this.item;
     }
 
-    public void setItem(String item) {
+    public void setItem(GunEntity item) {
         this.item = item;
     }
 
@@ -25,13 +23,5 @@ public class DetailTransactionEntity {
 
     public void setQuantity(int quantity) {
         this.quantity = quantity;
-    }
-
-    public int getPrice() {
-        return this.price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
     }
 }
